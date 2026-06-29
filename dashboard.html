@@ -145,12 +145,16 @@
 
     // قسم التذكيرات
     html+='<div class="card" style="margin-top:24px"><h2>🔔 التذكيرات</h2><div class="sub">عدّلي الأوقات والتفعيل من هنا</div>';
-    html+='<div id="remindersList" style="display:flex;flex-direction:column;gap:8px;margin-top:16px"></div>';
+    html+='<div id="remindersList" style="display:flex;flex-direction:column;gap:8px;margin-top:16px;max-height:300px;overflow-y:auto"></div>';
     html+='<button class="refresh" onclick="openAddReminder()" style="margin-top:12px;background:#8FA98A">+ إضافة تذكير جديد</button>';
     html+='</div>';
 
+    // رسم بياني الأسبوع
+    html+='<div class="card" style="margin-top:24px"><h2>📈 رسم بياني الأسبوع</h2><div id="weekChart" style="margin-top:16px"></div></div>';
+
     app.innerHTML=html;
     loadReminders();
+    drawWeekChart(rows);
   }
 
   // ---- التذكيرات ----
@@ -203,6 +207,26 @@
     if(supa){
       supa.from('reminders').insert({family_id:FAMILY_ID,emoji:emoji,title:title,hour:parseInt(h),minute:parseInt(m)}).then(function(){loadReminders();});
     }
+  }
+
+  // رسم بياني الأسبوع
+  function drawWeekChart(rows){
+    var chart=document.getElementById('weekChart');if(!chart)return;
+    var map={};rows.forEach(function(r){map[r.log_date]=r;});
+    var html='<div style="display:flex;flex-direction:column;gap:10px">';
+    for(var i=0;i<7;i++){
+      var d=new Date();d.setDate(d.getDate()-i);
+      var key=iso(d);var r=map[key];
+      var dn=r?ITEMS.filter(function(it){return (r.checklist||{})[it.id]}).length:0;
+      var pc=Math.round(dn/ITEMS.length*100);
+      var label=(i===0?'اليوم':DAYS[d.getDay()]);
+      html+='<div><span style="font-weight:600;color:#24463A;width:60px;display:inline-block">'+label+'</span>';
+      html+='<div style="display:inline-block;width:150px;height:20px;background:#E3EBDA;border-radius:6px;overflow:hidden;margin:0 10px">';
+      html+='<div style="height:100%;width:'+pc+'%;background:linear-gradient(90deg,#8FA98A,#6B8A7F);transition:width .3s"></div></div>';
+      html+='<span style="color:#6F6A5C;font-size:13px">'+pc+'%</span></div>';
+    }
+    html+='</div>';
+    chart.innerHTML=html;
   }
 
   window.load=load;

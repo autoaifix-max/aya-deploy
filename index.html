@@ -17,6 +17,14 @@
     --apricot:#E3A06B;--apricot-deep:#D08B53;--rose:#D58B7C;--gold:#C7A968;
     --ink:#2C2A24;--muted:#6F6A5C;--shadow:rgba(36,70,58,.10);
   }
+  html.dark-mode{
+    --ivory:#1A1A1A;--cream:#2A2A2A;--cream-deep:#333333;--pine:#E8F0E5;--pine-soft:#C5D7C0;
+    --sage:#6B8A7F;--sage-light:#5A7A70;--apricot:#D4915C;--apricot-deep:#C67F48;
+    --ink:#F5F5F5;--muted:#B0B0B0;
+  }
+  body.dark-mode{transition:background .3s, color .3s}
+  .theme-toggle{position:fixed;top:20px;left:20px;z-index:1000;background:var(--pine);color:#fff;border:none;width:45px;height:45px;border-radius:50%;cursor:pointer;font-size:20px;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(0,0,0,.2)}
+  .theme-toggle:hover{filter:brightness(.9)}
   *{margin:0;padding:0;box-sizing:border-box}
   html{scroll-behavior:smooth}
   body{font-family:'Tajawal',sans-serif;background:var(--ivory);color:var(--ink);line-height:1.85;-webkit-font-smoothing:antialiased;overflow-x:hidden}
@@ -161,6 +169,9 @@
 </head>
 <body>
 
+<!-- Dark Mode Toggle -->
+<button class="theme-toggle" id="themeToggle" title="تبديل المظهر الداكن">🌙</button>
+
 <!-- WELCOME SCREEN FOR NOTIFICATIONS -->
 <div id="welcomeOverlay" style="position:fixed;inset:0;background:rgba(36,70,58,.5);backdrop-filter:blur(3px);display:none;z-index:100;overflow-y:auto">
   <div style="display:flex;align-items:center;justify-content:center;min-height:100vh;padding:20px">
@@ -208,6 +219,7 @@
 </style>
 
 <header class="hero">
+  <a href="dashboard.html" style="position:absolute;top:20px;right:20px;background:#24463A;color:#fff;padding:10px 16px;border-radius:10px;text-decoration:none;font-size:14px;font-weight:600">📊 متابعة أبو مانع</a>
   <svg class="leaf" style="top:28px;left:-10px;width:88px;transform:rotate(-20deg)" viewBox="0 0 100 100" fill="currentColor"><path d="M50 5C20 25 15 60 50 95 85 60 80 25 50 5Z"/></svg>
   <svg class="leaf" style="bottom:56px;right:-14px;width:68px;transform:rotate(35deg)" viewBox="0 0 100 100" fill="currentColor"><path d="M50 5C20 25 15 60 50 95 85 60 80 25 50 5Z"/></svg>
   <span class="eyebrow">رحلة جميلة بدأت 🌷</span>
@@ -299,9 +311,9 @@
     <div class="sec-head">
       <div class="sec-tag">يومكِ الغذائي</div>
       <h2>رفيق يومكِ من الصباح للمساء</h2>
-      <p>وجبات صغيرة ومتقاربة ألطف على معدتكِ من الوجبات الكبيرة.</p>
+      <p>وجبات صغيرة ومتقاربة ألطف على معدتكِ من الوجبات الكبيرة. <button onclick="addCustomMeal()" style="background:var(--apricot);color:#fff;border:none;padding:6px 12px;border-radius:8px;cursor:pointer;font-size:12px;margin-right:10px">+ أضيفي وجبة</button></p>
     </div>
-    <div class="day">
+    <div class="day" id="mealsList">
       <div class="meal"><div class="meal-dot">☀️</div><div class="meal-time">قبل النهوض من السرير</div><div class="meal-when">أول ما تستيقظين</div><div class="meal-card"><span class="hi">تمرة + بسكويت جاف</span> — لقمة بسيطة تهدّئ غثيان الصباح قبل أن تقفي.</div></div>
       <div class="meal"><div class="meal-dot">🍳</div><div class="meal-time">الفطور</div><div class="meal-when">بعدها بقليل</div><div class="meal-card">بيضة مسلوقة + خبز + كوب حليب. بداية هادئة ومُشبعة.</div></div>
       <div class="meal"><div class="meal-dot">🍎</div><div class="meal-time">سناك الضحى</div><div class="meal-when">منتصف الصباح</div><div class="meal-card">فاكهة (موز أو تفاح أو برتقال) + حفنة لوز أو جوز.</div></div>
@@ -464,8 +476,25 @@
     });
   });
 
-  /* ---- meal reveal ---- */
+  /* ---- meal reveal + custom meals ---- */
+  var customMeals=JSON.parse(LS.get('aya_custom_meals')||'[]');
+  function saveMeals(){LS.set('aya_custom_meals',JSON.stringify(customMeals));}
+  function addCustomMeal(){
+    var emoji=prompt('رمز الوجبة:','🍲');if(!emoji)return;
+    var time=prompt('الوقت (مثل 15:30):','12:00');if(!time)return;
+    var desc=prompt('وصف الوجبة:','وجبة خفيفة');if(!desc)return;
+    customMeals.push({emoji:emoji,time:time,desc:desc});
+    saveMeals();
+    location.reload();
+  }
   var meals=document.querySelectorAll('.meal');
+  customMeals.forEach(function(m){
+    var div=document.createElement('div');
+    div.className='meal show';
+    div.innerHTML='<div class="meal-dot">'+m.emoji+'</div><div class="meal-time">'+m.time+'</div><div class="meal-when">وجبة مخصصة</div><div class="meal-card" style="display:flex;justify-content:space-between"><span>'+m.desc+'</span><button onclick="deleteCustomMeal('+customMeals.indexOf(m)+');location.reload()" style="background:#D58B7C;color:#fff;border:none;padding:4px 8px;border-radius:6px;cursor:pointer;font-size:11px">حذف</button></div>';
+    document.getElementById('mealsList').appendChild(div);
+  });
+  function deleteCustomMeal(idx){customMeals.splice(idx,1);saveMeals();}
   if('IntersectionObserver' in window){var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('show');io.unobserve(e.target);}})},{threshold:.2});meals.forEach(function(m){io.observe(m)});}
   else{meals.forEach(function(m){m.classList.add('show')});}
 
@@ -517,7 +546,21 @@
   };
   if(LS.get('aya_notif')==='1'&&'Notification' in window&&Notification.permission==='granted'){document.getElementById('notif').textContent='🔔 الإشعارات مُفعّلة';armReminders();}
 
+  /* ---- dark mode ---- */
+  function initDarkMode(){
+    var isDark=LS.get('aya_dark')==='1';
+    if(isDark)document.documentElement.classList.add('dark-mode');
+    document.getElementById('themeToggle').onclick=function(){
+      document.documentElement.classList.toggle('dark-mode');
+      LS.set('aya_dark', document.documentElement.classList.contains('dark-mode')?'1':'0');
+      document.getElementById('themeToggle').textContent=document.documentElement.classList.contains('dark-mode')?'☀️':'🌙';
+    };
+    document.getElementById('themeToggle').textContent=isDark?'☀️':'🌙';
+  }
+  initDarkMode();
+
   /* ---- push notifications ---- */
+  function playSound(){if('Audio'in window){try{var a=new Audio('data:audio/wav;base64,UklGRiYAAABXQVZFZm10IBAAAAABAAEAQB8AAAB9AAACABAAZGF0YQIAAAAAAA==');a.play().catch(function(){});}catch(e){}}}
   function b64ToUint8(s){const p='='.repeat((4-s.length%4)%4);const b=atob((s+p).replace(/-/g,'+').replace(/_/g,'/'));return Uint8Array.from([...b].map(c=>c.charCodeAt(0)));}
   async function enablePush(){
     if(!('serviceWorker'in navigator)||!('PushManager'in window)){toast('جهازكِ لا يدعم الإشعارات الفعلية');return;}
@@ -534,6 +577,7 @@
         );
       }
       LS.set('aya_notif_enabled','1');
+      playSound();
       toast('تم تفعيل الإشعارات! 🌿');
       closeWelcome();
     }catch(e){
@@ -547,10 +591,14 @@
     LS.set('aya_welcomed','1');
   }
   if(LS.get('aya_welcomed')!=='1'&&'serviceWorker'in navigator){
-    var w=document.getElementById('welcomeOverlay');
-    if(w){w.style.display='flex';}
-    document.getElementById('enableNotifBtn').onclick=enablePush;
-    document.getElementById('skipWelcomeBtn').onclick=closeWelcome;
+    setTimeout(function(){
+      var w=document.getElementById('welcomeOverlay');
+      if(w){w.style.display='flex';}
+      var btn=document.getElementById('enableNotifBtn');
+      if(btn)btn.onclick=enablePush;
+      var skipBtn=document.getElementById('skipWelcomeBtn');
+      if(skipBtn)skipBtn.onclick=closeWelcome;
+    }, 2000);
   }
 
   /* ---- service worker ---- */
