@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#24463A">
+<title>دليل آية الغذائي 🌿</title>
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Reem+Kufi:wght@400;500;600;700&family=Tajawal:wght@300;400;500;700&family=Aref+Ruqaa:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ivory:#FBF7EF;--cream:#F3EBDA;--cream-deep:#EADFC7;
+    --pine:#24463A;--pine-soft:#3A5C4D;--sage:#8FA98A;--sage-light:#C5D2BD;
+    --apricot:#E3A06B;--apricot-deep:#D08B53;--rose:#D58B7C;--gold:#C7A968;
+    --ink:#2C2A24;--muted:#6F6A5C;--shadow:rgba(36,70,58,.10);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{font-family:'Tajawal',sans-serif;background:var(--ivory);color:var(--ink);line-height:1.85;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  .wrap{max-width:680px;margin:0 auto;padding:0 22px}
+  .leaf{position:absolute;opacity:.5;pointer-events:none;color:var(--sage-light)}
+
+  /* hero */
+  .hero{position:relative;padding:72px 22px 54px;text-align:center;background:radial-gradient(120% 90% at 50% -10%, #FFFDF8 0%, var(--cream) 55%, var(--cream-deep) 100%);overflow:hidden}
+  .hero::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:48px;background:var(--ivory);border-radius:50% 50% 0 0/100% 100% 0 0}
+  .eyebrow{font-family:'Reem Kufi',sans-serif;font-size:13px;letter-spacing:3px;font-weight:500;color:var(--apricot-deep);background:rgba(227,160,107,.12);display:inline-block;padding:6px 18px;border-radius:40px;margin-bottom:20px;position:relative;z-index:2}
+  .hero h1{font-family:'Aref Ruqaa',serif;font-weight:700;font-size:clamp(34px,9vw,52px);color:var(--pine);line-height:1.3;margin-bottom:12px;position:relative;z-index:2}
+  .hero .sub{font-size:clamp(16px,4vw,19px);color:var(--pine-soft);max-width:440px;margin:0 auto;position:relative;z-index:2}
+  .size-card{position:relative;z-index:2;margin:32px auto 0;max-width:330px;background:#FFFFFFcc;border:1px solid #fff;border-radius:24px;padding:18px 20px;box-shadow:0 18px 40px -22px var(--shadow);display:flex;align-items:center;gap:16px;text-align:right;backdrop-filter:blur(4px)}
+  .size-icon{flex:0 0 auto;width:56px;height:56px;border-radius:50%;background:linear-gradient(145deg,var(--sage-light),var(--sage));display:grid;place-items:center;font-size:27px;box-shadow:inset 0 -4px 8px rgba(36,70,58,.15)}
+  .size-card .t{font-family:'Reem Kufi',sans-serif;font-weight:600;color:var(--pine);font-size:15.5px}
+  .size-card .d{font-size:13.5px;color:var(--muted);line-height:1.6}
+
+  section.block{padding:42px 0 6px}
+  .sec-head{margin-bottom:22px}
+  .sec-tag{font-family:'Reem Kufi',sans-serif;font-size:12px;letter-spacing:2px;color:var(--apricot-deep);font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:8px}
+  .sec-tag::before{content:"";width:26px;height:2px;background:var(--apricot);border-radius:2px}
+  .sec-head h2{font-family:'Reem Kufi',sans-serif;font-weight:700;font-size:clamp(22px,6vw,29px);color:var(--pine);line-height:1.4}
+  .sec-head p{color:var(--muted);font-size:14.5px;margin-top:6px}
+
+  /* daily panel: checklist */
+  .panel{background:#fff;border:1px solid var(--cream-deep);border-radius:22px;padding:20px 18px;box-shadow:0 16px 36px -26px var(--shadow)}
+  .progress-row{display:flex;align-items:center;gap:14px;margin-bottom:16px}
+  .ring{flex:0 0 auto;position:relative;width:58px;height:58px}
+  .ring svg{transform:rotate(-90deg)}
+  .ring .pct{position:absolute;inset:0;display:grid;place-items:center;font-family:'Reem Kufi',sans-serif;font-weight:700;color:var(--pine);font-size:15px}
+  .progress-row .msg{font-size:14.5px;color:var(--pine-soft);font-weight:500}
+  .progress-row .msg b{font-family:'Reem Kufi',sans-serif;color:var(--pine);display:block;font-size:16px}
+  .check{display:flex;align-items:center;gap:13px;padding:12px 10px;border-radius:14px;cursor:pointer;transition:background .2s;user-select:none}
+  .check:hover{background:var(--cream)}
+  .check+.check{border-top:1px solid #F4EEE1}
+  .box{flex:0 0 auto;width:26px;height:26px;border-radius:9px;border:2px solid var(--sage-light);display:grid;place-items:center;transition:all .25s;color:#fff;font-size:15px}
+  .check.done .box{background:var(--sage);border-color:var(--sage)}
+  .check .em{font-size:20px;flex:0 0 auto}
+  .check .lab{flex:1;font-size:15.5px;color:var(--ink);transition:color .25s}
+  .check.done .lab{color:var(--muted);text-decoration:line-through}
+  .check .st{color:var(--gold);font-size:13px}
+
+  /* water */
+  .water{margin-top:14px;background:linear-gradient(135deg,#fff,#F6FAF7);border:1px solid var(--cream-deep);border-radius:22px;padding:18px}
+  .water-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+  .water-top .ti{font-family:'Reem Kufi',sans-serif;font-weight:600;color:var(--pine);font-size:16px}
+  .water-top .ct{font-size:14px;color:var(--pine-soft)}
+  .cups{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
+  .cup{width:34px;height:42px;border:2px solid var(--sage-light);border-radius:6px 6px 12px 12px;position:relative;cursor:pointer;overflow:hidden;background:#fff;transition:transform .15s}
+  .cup:active{transform:scale(.9)}
+  .cup.full{border-color:var(--sage)}
+  .cup.full::after{content:"";position:absolute;left:0;right:0;bottom:0;top:30%;background:linear-gradient(var(--sage-light),var(--sage));animation:fill .3s ease}
+  @keyframes fill{from{top:100%}to{top:30%}}
+  .water-btns{display:flex;gap:10px}
+  .wbtn{flex:1;border:none;border-radius:13px;padding:11px;font-family:'Tajawal',sans-serif;font-weight:700;font-size:14.5px;cursor:pointer;transition:filter .2s}
+  .wbtn:hover{filter:brightness(.97)}
+  .wbtn.add{background:var(--sage);color:#fff}
+  .wbtn.minus{background:var(--cream);color:var(--pine-soft)}
+
+  /* reminders */
+  .rem{background:linear-gradient(140deg,#FFFDF8,#F6EFE2);border:1px solid var(--cream-deep);border-radius:22px;padding:20px 18px}
+  .rem h3{font-family:'Reem Kufi',sans-serif;color:var(--pine);font-size:17px;margin-bottom:4px;display:flex;align-items:center;gap:8px}
+  .rem p.lead{font-size:14px;color:var(--muted);margin-bottom:16px}
+  .rbtn{width:100%;border:none;border-radius:15px;padding:15px;font-family:'Reem Kufi',sans-serif;font-weight:600;font-size:15.5px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;transition:filter .2s,transform .1s}
+  .rbtn:active{transform:scale(.99)}
+  .rbtn.primary{background:linear-gradient(135deg,var(--apricot),var(--apricot-deep));color:#fff;box-shadow:0 12px 26px -14px rgba(208,139,83,.7)}
+  .rbtn.ghost{background:#fff;color:var(--pine);border:1px solid var(--cream-deep);margin-top:10px}
+  .rbtn:hover{filter:brightness(.98)}
+  .rem .hint{font-size:12.5px;color:var(--muted);margin-top:12px;line-height:1.7;text-align:center}
+  .times{margin-top:14px;background:#fff;border-radius:14px;padding:6px 14px;border:1px solid var(--cream-deep)}
+  .trow{display:flex;justify-content:space-between;align-items:center;padding:8px 0;font-size:14px;color:var(--pine-soft)}
+  .trow+.trow{border-top:1px dashed var(--cream-deep)}
+  .trow .tm{font-family:'Reem Kufi',sans-serif;color:var(--apricot-deep);font-weight:600;direction:ltr}
+
+  /* nutrient accordions */
+  .nutri{display:flex;flex-direction:column;gap:12px}
+  .acc{background:#fff;border:1px solid var(--cream-deep);border-radius:18px;overflow:hidden;transition:box-shadow .3s,border-color .3s}
+  .acc.open{box-shadow:0 16px 34px -22px var(--shadow);border-color:var(--sage-light)}
+  .acc-btn{width:100%;background:none;border:none;cursor:pointer;display:flex;align-items:center;gap:14px;padding:16px 18px;text-align:right;font-family:'Tajawal',sans-serif}
+  .acc-emoji{flex:0 0 auto;width:44px;height:44px;border-radius:13px;background:var(--cream);display:grid;place-items:center;font-size:22px;transition:background .3s}
+  .acc.open .acc-emoji{background:var(--sage-light)}
+  .acc-title{flex:1}
+  .acc-title .n{font-family:'Reem Kufi',sans-serif;font-weight:600;font-size:16.5px;color:var(--pine);display:block}
+  .acc-title .why{font-size:13px;color:var(--muted)}
+  .chev{flex:0 0 auto;color:var(--sage);transition:transform .35s;font-size:20px}
+  .acc.open .chev{transform:rotate(180deg);color:var(--apricot-deep)}
+  .acc-body{max-height:0;overflow:hidden;transition:max-height .4s ease}
+  .acc-inner{padding:0 18px 18px 18px;border-top:1px dashed var(--cream-deep);margin-top:2px;padding-top:14px}
+  .acc-inner .lbl{font-size:13px;color:var(--apricot-deep);font-weight:700;font-family:'Reem Kufi',sans-serif;margin-bottom:8px}
+  .chips{display:flex;flex-wrap:wrap;gap:7px}
+  .chip{background:var(--cream);color:var(--pine-soft);font-size:13.5px;padding:5px 13px;border-radius:30px;font-weight:500}
+  .tip-inline{margin-top:12px;font-size:13.5px;color:var(--pine-soft);background:rgba(143,169,138,.12);padding:9px 13px;border-radius:12px;border-right:3px solid var(--sage)}
+  .star{color:var(--gold)}
+
+  /* meal timeline */
+  .day{position:relative;margin-top:6px}
+  .day::before{content:"";position:absolute;right:27px;top:8px;bottom:30px;width:2px;background:linear-gradient(var(--apricot),var(--sage),var(--pine-soft));border-radius:2px}
+  .meal{position:relative;padding:0 64px 26px 0;opacity:0;transform:translateY(18px);transition:opacity .6s,transform .6s}
+  .meal.show{opacity:1;transform:none}
+  .meal-dot{position:absolute;right:14px;top:4px;width:28px;height:28px;border-radius:50%;background:#fff;border:2px solid var(--sage);display:grid;place-items:center;font-size:14px;z-index:2}
+  .meal-time{font-family:'Reem Kufi',sans-serif;font-weight:600;color:var(--pine);font-size:16.5px;margin-bottom:3px}
+  .meal-when{font-size:12.5px;color:var(--apricot-deep);font-weight:500;margin-bottom:7px}
+  .meal-card{background:#fff;border:1px solid var(--cream-deep);border-radius:16px;padding:14px 16px;font-size:14.5px;color:var(--pine-soft);line-height:1.75}
+  .meal-card .hi{color:var(--pine);font-weight:700}
+  .meal:nth-child(1) .meal-dot{border-color:var(--apricot)}
+  .meal:nth-child(2) .meal-dot{border-color:var(--gold)}
+  .meal:nth-child(6) .meal-dot{border-color:var(--pine-soft)}
+
+  /* avoid */
+  .avoid{display:grid;grid-template-columns:repeat(2,1fr);gap:11px}
+  .avoid-item{background:#fff;border:1px solid #EFD9CF;border-radius:15px;padding:14px;display:flex;align-items:flex-start;gap:10px}
+  .avoid-item .x{flex:0 0 auto;width:24px;height:24px;border-radius:50%;background:rgba(213,139,124,.16);color:var(--rose);display:grid;place-items:center;font-size:13px;font-weight:700;margin-top:2px}
+  .avoid-item span.tx{font-size:14px;color:var(--pine-soft);line-height:1.55}
+
+  /* tips */
+  .tips{display:flex;flex-direction:column;gap:11px}
+  .tip{background:linear-gradient(135deg,#fff,#FFFDF8);border:1px solid var(--cream-deep);border-radius:16px;padding:15px 16px;display:flex;gap:14px;align-items:flex-start}
+  .tip .tnum{flex:0 0 auto;width:34px;height:34px;border-radius:11px;background:var(--cream);color:var(--apricot-deep);font-family:'Reem Kufi',sans-serif;font-weight:700;font-size:16px;display:grid;place-items:center}
+  .tip .tb b{color:var(--pine);font-weight:700;display:block;font-size:15px;font-family:'Reem Kufi',sans-serif}
+  .tip .tb{font-size:14px;color:var(--muted);line-height:1.7}
+
+  /* alert */
+  .alert{margin-top:38px;background:linear-gradient(135deg,#FBEDE8,#F8E4DB);border:1px solid #EFC9BC;border-radius:22px;padding:24px 22px;text-align:center}
+  .alert .rng{font-size:30px;margin-bottom:8px}
+  .alert h3{font-family:'Reem Kufi',sans-serif;color:#B5644F;font-size:18px;margin-bottom:10px}
+  .alert p{color:#8C5648;font-size:14.5px;line-height:1.8;max-width:440px;margin:0 auto}
+
+  /* dedication / closing */
+  .closing{margin-top:42px;padding:58px 26px 70px;text-align:center;position:relative;background:radial-gradient(120% 120% at 50% 120%, var(--cream-deep) 0%, var(--cream) 45%, var(--ivory) 100%);border-radius:34px 34px 0 0}
+  .closing .heart{font-size:28px;margin-bottom:18px;display:inline-block}
+  .closing .ded{font-family:'Aref Ruqaa',serif;font-weight:700;font-size:clamp(22px,6.2vw,31px);color:var(--pine);line-height:1.65;max-width:460px;margin:0 auto 18px}
+  .closing .ded .nm{color:var(--apricot-deep)}
+  .closing .by{font-family:'Reem Kufi',sans-serif;font-size:15px;color:var(--pine-soft);font-weight:500}
+  .disc{margin-top:30px;font-size:12.5px;color:var(--muted);max-width:420px;margin-inline:auto;line-height:1.7;opacity:.85}
+
+  .toast{position:fixed;left:50%;bottom:26px;transform:transl(-50%,40px);translate:-50% 40px;background:var(--pine);color:#fff;padding:13px 22px;border-radius:30px;font-size:14px;font-weight:500;box-shadow:0 16px 30px -12px rgba(0,0,0,.4);opacity:0;transition:opacity .3s,translate .3s;z-index:99;pointer-events:none;max-width:90vw;text-align:center}
+  .toast.show{opacity:1;translate:-50% 0}
+
+  @media (max-width:430px){.avoid{grid-template-columns:1fr}.hero{padding-top:58px}}
+  @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}.meal{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+
+<!-- WELCOME SCREEN FOR NOTIFICATIONS -->
+<div id="welcomeOverlay" style="position:fixed;inset:0;background:rgba(36,70,58,.5);backdrop-filter:blur(3px);display:none;z-index:100;overflow-y:auto">
+  <div style="display:flex;align-items:center;justify-content:center;min-height:100vh;padding:20px">
+    <div style="background:#fff;border-radius:28px;padding:40px 30px;max-width:420px;box-shadow:0 24px 48px rgba(0,0,0,.2);animation:slideUp .5s ease">
+      <div style="text-align:center;margin-bottom:24px">
+        <div style="font-size:48px;margin-bottom:16px">🌿</div>
+        <h2 style="font-family:'Reem Kufi',sans-serif;font-size:24px;color:#24463A;margin-bottom:8px">أهلاً يا آية 🤍</h2>
+        <p style="font-size:14.5px;color:#6F6A5C;line-height:1.7">سأذكّركِ بكل وجبة وكوب ماء، حتى لو التطبيق مغلق</p>
+      </div>
+
+      <div style="background:#F3EBDA;border-radius:16px;padding:20px;margin-bottom:24px">
+        <div style="display:flex;gap:12px;margin-bottom:14px">
+          <span style="flex:0 0 auto;width:32px;height:32px;border-radius:50%;background:#8FA98A;color:#fff;display:grid;place-items:center;font-weight:700;font-size:16px">١</span>
+          <div>
+            <div style="font-family:'Reem Kufi',sans-serif;font-weight:600;color:#24463A;margin-bottom:3px">فعّلي الإشعارات</div>
+            <div style="font-size:13px;color:#6F6A5C">اضغطي على الزر وأعطي الإذن</div>
+          </div>
+        </div>
+        <div style="display:flex;gap:12px;margin-bottom:14px">
+          <span style="flex:0 0 auto;width:32px;height:32px;border-radius:50%;background:#8FA98A;color:#fff;display:grid;place-items:center;font-weight:700;font-size:16px">٢</span>
+          <div>
+            <div style="font-family:'Reem Kufi',sans-serif;font-weight:600;color:#24463A;margin-bottom:3px">أضيفي للشاشة الرئيسية</div>
+            <div style="font-size:13px;color:#6F6A5C">من قائمة Chrome ⋮ → «إضافة إلى الشاشة الرئيسية»</div>
+          </div>
+        </div>
+        <div style="display:flex;gap:12px">
+          <span style="flex:0 0 auto;width:32px;height:32px;border-radius:50%;background:#8FA98A;color:#fff;display:grid;place-items:center;font-weight:700;font-size:16px">٣</span>
+          <div>
+            <div style="font-family:'Reem Kufi',sans-serif;font-weight:600;color:#24463A;margin-bottom:3px">استثني التطبيق من توفير البطارية</div>
+            <div style="font-size:13px;color:#6F6A5C">إعدادات البطارية → التطبيق → غير مقيّد</div>
+          </div>
+        </div>
+      </div>
+
+      <button id="enableNotifBtn" style="width:100%;border:none;border-radius:15px;padding:15px;background:linear-gradient(135deg,#E3A06B,#D08B53);color:#fff;font-family:'Reem Kufi',sans-serif;font-weight:600;font-size:15.5px;cursor:pointer;margin-bottom:10px">🔔 فعّلي الإشعارات</button>
+      <button id="skipWelcomeBtn" style="width:100%;border:1px solid #EADFC7;background:#fff;border-radius:15px;padding:15px;color:#24463A;font-family:'Reem Kufi',sans-serif;font-weight:600;font-size:15.5px;cursor:pointer">تخطّي في الوقت</button>
+
+      <p style="font-size:12px;color:#6F6A5C;margin-top:16px;text-align:center;line-height:1.6">لا تقلقي — يمكنكِ تفعيل الإشعارات في أي وقت من قائمة التطبيق.</p>
+    </div>
+  </div>
+</div>
+
+<style>
+  @keyframes slideUp{from{transform:translateY(30px);opacity:0}to{transform:translateY(0);opacity:1}}
+</style>
+
+<header class="hero">
+  <svg class="leaf" style="top:28px;left:-10px;width:88px;transform:rotate(-20deg)" viewBox="0 0 100 100" fill="currentColor"><path d="M50 5C20 25 15 60 50 95 85 60 80 25 50 5Z"/></svg>
+  <svg class="leaf" style="bottom:56px;right:-14px;width:68px;transform:rotate(35deg)" viewBox="0 0 100 100" fill="currentColor"><path d="M50 5C20 25 15 60 50 95 85 60 80 25 50 5Z"/></svg>
+  <span class="eyebrow">رحلة جميلة بدأت 🌷</span>
+  <h1>غذاؤكِ يا آية</h1>
+  <p class="sub">دليلكِ الدافئ في الشهر الثاني — يرافقكِ يومًا بيوم، ويذكّركِ بما تنسَين 🤍</p>
+  <div class="size-card">
+    <div class="size-icon">🫘</div>
+    <div>
+      <span class="t">طفلكما الآن بحجم حبة الفول</span>
+      <span class="d">قلبه ينبض وملامحه تتكوّن — أنتِ تبنين عالمًا صغيرًا في كل وجبة</span>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <!-- CHECKLIST -->
+  <section class="block">
+    <div class="sec-head">
+      <div class="sec-tag">مهامكِ اليوم</div>
+      <h2>قائمتكِ ليوم متوازن</h2>
+      <p>علّمي كل ما أنجزتِه — تنحفظ تلقائيًا وتتجدّد كل صباح.</p>
+    </div>
+    <div class="panel">
+      <div class="progress-row">
+        <div class="ring">
+          <svg width="58" height="58"><circle cx="29" cy="29" r="25" fill="none" stroke="#EADFC7" stroke-width="6"/><circle id="ringp" cx="29" cy="29" r="25" fill="none" stroke="#8FA98A" stroke-width="6" stroke-linecap="round" stroke-dasharray="157" stroke-dashoffset="157"/></svg>
+          <span class="pct" id="pct">0%</span>
+        </div>
+        <div class="msg"><b id="msgb">يلا نبدأ يومنا 🌿</b><span id="msgs">كل خطوة صغيرة تهمّ</span></div>
+      </div>
+      <div id="list"></div>
+    </div>
+
+    <!-- WATER -->
+    <div class="water">
+      <div class="water-top">
+        <span class="ti">💧 كوب الماء</span>
+        <span class="ct"><span id="wc">0</span> من 8 أكواب</span>
+      </div>
+      <div class="cups" id="cups"></div>
+      <div class="water-btns">
+        <button class="wbtn add" id="wadd">+ كوب</button>
+        <button class="wbtn minus" id="wmin">−</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- REMINDERS -->
+  <section class="block">
+    <div class="sec-head">
+      <div class="sec-tag">خلّي جوالكِ يذكّركِ</div>
+      <h2>تذكيرات لا تُنسى</h2>
+    </div>
+    <div class="rem">
+      <h3>🔔 أضيفي تذكيراتكِ لتقويم الجوال</h3>
+      <p class="lead">بضغطة واحدة، تنحفظ كل التذكيرات في تقويم جوالكِ، ويذكّركِ الجوال يوميًا — حتى لو كان التطبيق مغلقًا.</p>
+      <button class="rbtn primary" id="ics">📅 أضيفي التذكيرات لتقويمي</button>
+      <button class="rbtn ghost" id="notif">🔕 تفعيل إشعارات داخل التطبيق</button>
+      <div class="times">
+        <div class="trow"><span>💊 حمض الفوليك</span><span class="tm">9:00 ص</span></div>
+        <div class="trow"><span>🍳 الفطور</span><span class="tm">8:00 ص</span></div>
+        <div class="trow"><span>🥗 الغداء</span><span class="tm">1:30 م</span></div>
+        <div class="trow"><span>💧 كوب ماء</span><span class="tm">11:00 ص · 4:00 م</span></div>
+        <div class="trow"><span>🌙 العشاء</span><span class="tm">8:00 م</span></div>
+      </div>
+      <p class="hint">بعد الضغط، افتحي الملف واختاري «إضافة إلى التقويم». التذكيرات تتكرّر يوميًا تلقائيًا.</p>
+    </div>
+  </section>
+
+  <!-- NUTRIENTS -->
+  <section class="block">
+    <div class="sec-head">
+      <div class="sec-tag">أساسيات هذه المرحلة</div>
+      <h2>العناصر التي يحتاجها جسمكِ</h2>
+      <p>اضغطي على كل عنصر لتعرفي مصادره من أكلكِ اليومي.</p>
+    </div>
+    <div class="nutri">
+      <div class="acc"><button class="acc-btn"><span class="acc-emoji">🌿</span><span class="acc-title"><span class="n">حمض الفوليك <span class="star">★</span></span><span class="why">الأهم الآن — يحمي تكوّن الجهاز العصبي</span></span><span class="chev">⌄</span></button><div class="acc-body"><div class="acc-inner"><div class="lbl">مصادره</div><div class="chips"><span class="chip">سبانخ</span><span class="chip">جرجير</span><span class="chip">عدس</span><span class="chip">حمص</span><span class="chip">فول</span><span class="chip">برتقال</span><span class="chip">أفوكادو</span></div><div class="tip-inline">+ استمري على المكمّل الذي وصفه الطبيب، فهو الركيزة الأهم هذه الفترة.</div></div></div></div>
+      <div class="acc"><button class="acc-btn"><span class="acc-emoji">🩸</span><span class="acc-title"><span class="n">الحديد</span><span class="why">يحميكِ من فقر الدم والتعب</span></span><span class="chev">⌄</span></button><div class="acc-body"><div class="acc-inner"><div class="lbl">مصادره</div><div class="chips"><span class="chip">لحم أحمر مطهو جيدًا</span><span class="chip">عدس</span><span class="chip">تمر</span><span class="chip">سبانخ</span></div><div class="tip-inline">كوب عصير برتقال مع الوجبة يضاعف امتصاص الحديد 🍊</div></div></div></div>
+      <div class="acc"><button class="acc-btn"><span class="acc-emoji">🦴</span><span class="acc-title"><span class="n">الكالسيوم</span><span class="why">لبناء عظام طفلكِ</span></span><span class="chev">⌄</span></button><div class="acc-body"><div class="acc-inner"><div class="lbl">مصادره</div><div class="chips"><span class="chip">حليب مبستر</span><span class="chip">زبادي</span><span class="chip">جبن مبستر</span><span class="chip">سمسم</span><span class="chip">طحينة</span></div></div></div></div>
+      <div class="acc"><button class="acc-btn"><span class="acc-emoji">🍗</span><span class="acc-title"><span class="n">البروتين</span><span class="why">لنمو أنسجة طفلكِ</span></span><span class="chev">⌄</span></button><div class="acc-body"><div class="acc-inner"><div class="lbl">مصادره</div><div class="chips"><span class="chip">دجاج</span><span class="chip">لحم</span><span class="chip">بيض مطهو جيدًا</span><span class="chip">سمك مسموح</span><span class="chip">بقوليات</span></div></div></div></div>
+      <div class="acc"><button class="acc-btn"><span class="acc-emoji">🐟</span><span class="acc-title"><span class="n">أوميغا-3</span><span class="why">لتطوّر دماغ طفلكِ</span></span><span class="chev">⌄</span></button><div class="acc-body"><div class="acc-inner"><div class="lbl">مصادره</div><div class="chips"><span class="chip">سلمون</span><span class="chip">سردين</span><span class="chip">بذور الكتان</span><span class="chip">جوز</span></div></div></div></div>
+    </div>
+  </section>
+
+  <!-- TIMELINE -->
+  <section class="block">
+    <div class="sec-head">
+      <div class="sec-tag">يومكِ الغذائي</div>
+      <h2>رفيق يومكِ من الصباح للمساء</h2>
+      <p>وجبات صغيرة ومتقاربة ألطف على معدتكِ من الوجبات الكبيرة.</p>
+    </div>
+    <div class="day">
+      <div class="meal"><div class="meal-dot">☀️</div><div class="meal-time">قبل النهوض من السرير</div><div class="meal-when">أول ما تستيقظين</div><div class="meal-card"><span class="hi">تمرة + بسكويت جاف</span> — لقمة بسيطة تهدّئ غثيان الصباح قبل أن تقفي.</div></div>
+      <div class="meal"><div class="meal-dot">🍳</div><div class="meal-time">الفطور</div><div class="meal-when">بعدها بقليل</div><div class="meal-card">بيضة مسلوقة + خبز + كوب حليب. بداية هادئة ومُشبعة.</div></div>
+      <div class="meal"><div class="meal-dot">🍎</div><div class="meal-time">سناك الضحى</div><div class="meal-when">منتصف الصباح</div><div class="meal-card">فاكهة (موز أو تفاح أو برتقال) + حفنة لوز أو جوز.</div></div>
+      <div class="meal"><div class="meal-dot">🥗</div><div class="meal-time">الغداء</div><div class="meal-when">منتصف اليوم</div><div class="meal-card">أرز + <span class="hi">دجاج أو سمك مشوي</span> + سلطة جرجير وسبانخ + <span class="hi">شوربة عدس</span> (حديد وفوليك وبروتين في طبق واحد).</div></div>
+      <div class="meal"><div class="meal-dot">🍵</div><div class="meal-time">سناك العصر</div><div class="meal-when">بعد الظهر</div><div class="meal-card">زبادي + ملعقة عسل أو تمر، أو خضار مقطّعة (خيار، جزر).</div></div>
+      <div class="meal"><div class="meal-dot">🌙</div><div class="meal-time">العشاء + قبل النوم</div><div class="meal-when">المساء</div><div class="meal-card">عشاء خفيف: خبز + جبن مبستر أو فول وخضار. وكوب <span class="hi">حليب دافئ</span> قبل النوم يعينكِ على نوم أهدأ.</div></div>
+    </div>
+  </section>
+
+  <!-- AVOID -->
+  <section class="block">
+    <div class="sec-head"><div class="sec-tag">لسلامتكِ وسلامته</div><h2>أطعمة نؤجّلها لما بعد</h2></div>
+    <div class="avoid">
+      <div class="avoid-item"><span class="x">✕</span><span class="tx">اللحوم والدجاج والبيض النيّ أو غير مكتمل الطهي</span></div>
+      <div class="avoid-item"><span class="x">✕</span><span class="tx">الألبان والأجبان غير المبسترة</span></div>
+      <div class="avoid-item"><span class="x">✕</span><span class="tx">الأسماك عالية الزئبق (السلمون والسردين آمنان)</span></div>
+      <div class="avoid-item"><span class="x">✕</span><span class="tx">الإكثار من القهوة والشاي (كوب واحد كحدّ أقصى)</span></div>
+      <div class="avoid-item"><span class="x">✕</span><span class="tx">اللانشون والمرتديلا الباردة دون تسخين</span></div>
+      <div class="avoid-item"><span class="x">✕</span><span class="tx">الفواكه والخضار غير المغسولة جيدًا</span></div>
+    </div>
+  </section>
+
+  <!-- TIPS -->
+  <section class="block">
+    <div class="sec-head"><div class="sec-tag">إذا زارَكِ الوحام</div><h2>لطائف تهدّئ الغثيان</h2></div>
+    <div class="tips">
+      <div class="tip"><span class="tnum">١</span><span class="tb"><b>كُلي قليلًا كل ٢–٣ ساعات</b>المعدة الفارغة تزيد الغثيان، فالقليل المتكرر أرحم.</span></div>
+      <div class="tip"><span class="tnum">٢</span><span class="tb"><b>الزنجبيل صديقكِ</b>شاي زنجبيل خفيف أو قطعة صغيرة تهدّئ المعدة.</span></div>
+      <div class="tip"><span class="tnum">٣</span><span class="tb"><b>ابتعدي عن الروائح القوية</b>والأكل الدسم والمقليّ وقت الغثيان.</span></div>
+      <div class="tip"><span class="tnum">٤</span><span class="tb"><b>رشفات ماء صغيرة ومتكررة</b>أسهل من الكوب الكامل دفعة واحدة.</span></div>
+    </div>
+  </section>
+
+  <!-- ALERT -->
+  <div class="alert">
+    <div class="rng">🩺</div>
+    <h3>راجعي الطبيب فورًا إذا حدث</h3>
+    <p>نزيف، أو ألم بطن شديد ومستمر، أو حرارة عالية، أو غثيان وقيء يمنعكِ من الأكل والشرب تمامًا. لا تترددي أبدًا — الاطمئنان حقّكِ.</p>
+  </div>
+
+</div>
+
+<!-- DEDICATION -->
+<footer class="closing">
+  <span class="heart">🤍</span>
+  <div class="ded">إلى <span class="nm">آية</span>… مَن تحمل بين يديها حلمنا الذي طال انتظاره. اعتني بنفسكِ، فأنتِ وهذه الأمانة الصغيرة أغلى ما على قلبي.</div>
+  <div class="by">— زوجكِ المحبّ جدًّا 😘🌿</div>
+  <p class="disc">هذا الدليل للتنظيم والاطمئنان فقط، ولا يُغني عن متابعة طبيبكِ المختص. الجرعات والمكمّلات يحدّدها الطبيب حسب حالتكِ.</p>
+</footer>
+
+<div class="toast" id="toast"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+  var LS = {get:function(k){try{return localStorage.getItem(k)}catch(e){return null}},set:function(k,v){try{localStorage.setItem(k,v)}catch(e){}}};
+  function today(){var d=new Date();return d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate();}
+  function toast(m){var t=document.getElementById('toast');t.textContent=m;t.classList.add('show');clearTimeout(t._t);t._t=setTimeout(function(){t.classList.remove('show')},2600);}
+
+  /* ====== المزامنة السحابية (Supabase) ======
+     تعمل فقط بعد تعبئة القيم الثلاث. قبلها التطبيق يشتغل عادي بالحفظ المحلي. */
+  var SUPA_URL='https://vwzppnjxbmkdknzxyrle.supabase.co';    // رابط مشروع Supabase
+  var SUPA_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZ3enBwbmp4Ym1rZGtuenh5cmxlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODI2NzA3OTEsImV4cCI6MjA5ODI0Njc5MX0.ClasZhTrDgt3ku8n88vhc3dxmPu2ZbVsoEu2uzLYBfY';    // anon public key
+  var FAMILY_ID='00c5bd1d-38b7-4470-a3d5-f195fc77572c';   // المعرّف العائلي من جدول family
+  var VAPID_PUBLIC='BDTO_PlU8X0mcPsRQtnC1PWSOlNyAOmrlxFE1n3CYlHXbOFADapusmkbN4z-hep9PO78A0AQqzyAaG2gcB3MC10';  // مفتاح VAPID العام للإشعارات
+  var supa=null;
+  try{ if(SUPA_URL && SUPA_KEY && FAMILY_ID && window.supabase){ supa=window.supabase.createClient(SUPA_URL,SUPA_KEY); } }catch(e){}
+  function p2(n){return n<10?'0'+n:''+n;}
+  function isoDate(){var d=new Date();return d.getFullYear()+'-'+p2(d.getMonth()+1)+'-'+p2(d.getDate());}
+  var _pt;
+  function cloudPush(){
+    if(!supa)return;
+    clearTimeout(_pt);
+    _pt=setTimeout(function(){
+      try{
+        supa.from('daily_logs').upsert(
+          {family_id:FAMILY_ID,log_date:isoDate(),checklist:state,water_count:water,updated_at:new Date().toISOString()},
+          {onConflict:'family_id,log_date'}
+        ).then(function(){},function(){});
+      }catch(e){}
+    },800);
+  }
+  function cloudPull(){
+    if(!supa)return;
+    try{
+      supa.from('daily_logs').select('checklist,water_count')
+        .eq('family_id',FAMILY_ID).eq('log_date',isoDate()).maybeSingle()
+        .then(function(res){
+          if(res&&res.data){
+            if(res.data.checklist&&typeof res.data.checklist==='object')state=res.data.checklist;
+            if(typeof res.data.water_count==='number')water=res.data.water_count;
+            syncChecklistDOM();updateProgress();renderWater();
+          }
+        },function(){});
+    }catch(e){}
+  }
+
+  /* ---- checklist ---- */
+  var ITEMS=[
+    {id:'folic',e:'💊',t:'حمض الفوليك (المكمّل)',star:true},
+    {id:'wake',e:'🌅',t:'لقمة قبل النهوض'},
+    {id:'bfast',e:'🍳',t:'الفطور'},
+    {id:'snk1',e:'🍎',t:'سناك الضحى'},
+    {id:'lunch',e:'🥗',t:'الغداء'},
+    {id:'snk2',e:'🍵',t:'سناك العصر'},
+    {id:'dinner',e:'🌙',t:'العشاء'},
+    {id:'milk',e:'🥛',t:'حليب قبل النوم'}
+  ];
+  var state={};
+  (function loadCheck(){
+    var raw=LS.get('aya_check');
+    if(raw){try{var o=JSON.parse(raw);if(o.date===today())state=o.checked||{};}catch(e){}}
+  })();
+  function saveCheck(){LS.set('aya_check',JSON.stringify({date:today(),checked:state}));cloudPush();}
+  var listEl=document.getElementById('list');
+  ITEMS.forEach(function(it){
+    var row=document.createElement('div');row.id='chk-'+it.id;row.className='check'+(state[it.id]?' done':'');
+    row.innerHTML='<span class="box">'+(state[it.id]?'✓':'')+'</span><span class="em">'+it.e+'</span><span class="lab">'+it.t+'</span>'+(it.star?'<span class="st">★</span>':'');
+    row.onclick=function(){
+      state[it.id]=!state[it.id];
+      row.classList.toggle('done',state[it.id]);
+      row.querySelector('.box').textContent=state[it.id]?'✓':'';
+      saveCheck();updateProgress();
+    };
+    listEl.appendChild(row);
+  });
+  function syncChecklistDOM(){ITEMS.forEach(function(it){var r=document.getElementById('chk-'+it.id);if(!r)return;var on=!!state[it.id];r.classList.toggle('done',on);r.querySelector('.box').textContent=on?'✓':'';});}
+  function updateProgress(){
+    var done=ITEMS.filter(function(i){return state[i.id]}).length;
+    var pc=Math.round(done/ITEMS.length*100);
+    document.getElementById('pct').textContent=pc+'%';
+    document.getElementById('ringp').style.strokeDashoffset=157-(157*pc/100);
+    var b=document.getElementById('msgb'),s=document.getElementById('msgs');
+    if(pc===0){b.textContent='يلا نبدأ يومنا 🌿';s.textContent='كل خطوة صغيرة تهمّ';}
+    else if(pc<50){b.textContent='بداية جميلة 💛';s.textContent='أنتِ ماشية صح';}
+    else if(pc<100){b.textContent='ما شاء الله، نصف الطريق ✨';s.textContent='كمّلي بهدوء';}
+    else{b.textContent='أكملتِ يومكِ 🌷';s.textContent='فخورون فيكِ — أنتِ تعتنين بكما';}
+  }
+  updateProgress();
+
+  /* ---- water ---- */
+  var GOAL=8, water=0;
+  (function loadWater(){var raw=LS.get('aya_water');if(raw){try{var o=JSON.parse(raw);if(o.date===today())water=o.n||0;}catch(e){}}})();
+  var cupsEl=document.getElementById('cups');
+  function renderWater(){
+    cupsEl.innerHTML='';
+    for(var i=0;i<GOAL;i++){var c=document.createElement('div');c.className='cup'+(i<water?' full':'');c.onclick=(function(idx){return function(){water=idx+1;commitWater();}})(i);cupsEl.appendChild(c);}
+    document.getElementById('wc').textContent=water;
+  }
+  function commitWater(){if(water<0)water=0;if(water>GOAL)water=GOAL;LS.set('aya_water',JSON.stringify({date:today(),n:water}));cloudPush();renderWater();if(water===GOAL)toast('أحسنتِ! أكملتِ أكوابكِ اليوم 💧');}
+  document.getElementById('wadd').onclick=function(){water++;commitWater();};
+  document.getElementById('wmin').onclick=function(){water--;commitWater();};
+  renderWater();
+
+  /* ---- accordions ---- */
+  document.querySelectorAll('.acc-btn').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      var acc=btn.parentElement,body=acc.querySelector('.acc-body');
+      if(acc.classList.contains('open')){acc.classList.remove('open');body.style.maxHeight=null;}
+      else{acc.classList.add('open');body.style.maxHeight=body.scrollHeight+30+'px';}
+    });
+  });
+
+  /* ---- meal reveal ---- */
+  var meals=document.querySelectorAll('.meal');
+  if('IntersectionObserver' in window){var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('show');io.unobserve(e.target);}})},{threshold:.2});meals.forEach(function(m){io.observe(m)});}
+  else{meals.forEach(function(m){m.classList.add('show')});}
+
+  /* ---- calendar .ics ---- */
+  function pad(n){return n<10?'0'+n:''+n;}
+  function dt(h,m){var d=new Date();return d.getFullYear()+pad(d.getMonth()+1)+pad(d.getDate())+'T'+pad(h)+pad(m)+'00';}
+  function vevent(uid,h,m,sum,desc){
+    return ['BEGIN:VEVENT','UID:'+uid+'@aya.guide','DTSTAMP:'+dt(new Date().getHours(),new Date().getMinutes()),
+    'DTSTART:'+dt(h,m),'DURATION:PT10M','RRULE:FREQ=DAILY','SUMMARY:'+sum,'DESCRIPTION:'+desc,
+    'BEGIN:VALARM','ACTION:DISPLAY','DESCRIPTION:'+sum,'TRIGGER:PT0M','END:VALARM','END:VEVENT'].join('\r\n');
+  }
+  document.getElementById('ics').onclick=function(){
+    var ev=[
+      vevent('folic',9,0,'💊 حمض الفوليك - لا تنسيه يا آية','تذكير يومي بأخذ المكمّل'),
+      vevent('bfast',8,0,'🍳 وقت الفطور','بداية هادئة ومُشبعة'),
+      vevent('water1',11,0,'💧 اشربي كوب ماء',''),
+      vevent('lunch',13,30,'🥗 وقت الغداء','أرز + دجاج/سمك + سلطة + شوربة عدس'),
+      vevent('water2',16,0,'💧 اشربي كوب ماء',''),
+      vevent('dinner',20,0,'🌙 عشاء خفيف','وكوب حليب دافئ قبل النوم')
+    ];
+    var ics=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Aya Guide//AR','CALSCALE:GREGORIAN','METHOD:PUBLISH'].concat(ev).concat(['END:VCALENDAR']).join('\r\n');
+    var blob=new Blob([ics],{type:'text/calendar;charset=utf-8'});
+    var url=URL.createObjectURL(blob);var a=document.createElement('a');a.href=url;a.download='تذكيرات-آية.ics';document.body.appendChild(a);a.click();a.remove();
+    setTimeout(function(){URL.revokeObjectURL(url)},1500);
+    toast('تم تجهيز التذكيرات — افتحي الملف وأضيفيها لتقويمكِ 📅');
+  };
+
+  /* ---- in-app notifications ---- */
+  var REM=[{h:9,m:0,b:'💊 وقت حمض الفوليك يا آية'},{h:8,m:0,b:'🍳 وقت الفطور'},{h:11,m:0,b:'💧 اشربي كوب ماء'},{h:13,m:30,b:'🥗 وقت الغداء'},{h:16,m:0,b:'💧 اشربي كوب ماء'},{h:20,m:0,b:'🌙 عشاء خفيف وحليب دافئ'}];
+  function armReminders(){
+    if(!('Notification' in window)||Notification.permission!=='granted')return;
+    var now=new Date();
+    REM.forEach(function(r){
+      var t=new Date();t.setHours(r.h,r.m,0,0);
+      var ms=t-now;
+      if(ms>0&&ms<86400000){setTimeout(function(){notify('دليل آية 🌿',r.b);},ms);}
+    });
+  }
+  function notify(title,body){
+    if(navigator.serviceWorker&&navigator.serviceWorker.controller){navigator.serviceWorker.controller.postMessage({type:'notify',title:title,body:body});}
+    else if('Notification' in window&&Notification.permission==='granted'){new Notification(title,{body:body,icon:'icon-192.png'});}
+  }
+  document.getElementById('notif').onclick=function(){
+    if(!('Notification' in window)){toast('جهازكِ لا يدعم الإشعارات — استخدمي تذكيرات التقويم 📅');return;}
+    Notification.requestPermission().then(function(p){
+      if(p==='granted'){LS.set('aya_notif','1');armReminders();notify('تم التفعيل 🌿','سأذكّركِ بلطف خلال اليوم');document.getElementById('notif').textContent='🔔 الإشعارات مُفعّلة';}
+      else{toast('لم يتم التفعيل — تذكيرات التقويم تبقى الأضمن 📅');}
+    });
+  };
+  if(LS.get('aya_notif')==='1'&&'Notification' in window&&Notification.permission==='granted'){document.getElementById('notif').textContent='🔔 الإشعارات مُفعّلة';armReminders();}
+
+  /* ---- push notifications ---- */
+  function b64ToUint8(s){const p='='.repeat((4-s.length%4)%4);const b=atob((s+p).replace(/-/g,'+').replace(/_/g,'/'));return Uint8Array.from([...b].map(c=>c.charCodeAt(0)));}
+  async function enablePush(){
+    if(!('serviceWorker'in navigator)||!('PushManager'in window)){toast('جهازكِ لا يدعم الإشعارات الفعلية');return;}
+    const perm=await Notification.requestPermission();
+    if(perm!=='granted'){toast('تم رفض الإشعارات');return;}
+    try{
+      const reg=await navigator.serviceWorker.ready;
+      const sub=await reg.pushManager.subscribe({userVisibleOnly:true,applicationServerKey:b64ToUint8(VAPID_PUBLIC)});
+      const j=sub.toJSON();
+      if(supa){
+        await supa.from('push_subscriptions').upsert(
+          {family_id:FAMILY_ID,endpoint:j.endpoint,p256dh:j.keys.p256dh,auth:j.keys.auth},
+          {onConflict:'endpoint'}
+        );
+      }
+      LS.set('aya_notif_enabled','1');
+      toast('تم تفعيل الإشعارات! 🌿');
+      closeWelcome();
+    }catch(e){
+      toast('خطأ في تفعيل الإشعارات');
+      console.error(e);
+    }
+  }
+  function closeWelcome(){
+    var w=document.getElementById('welcomeOverlay');
+    if(w){w.style.display='none';}
+    LS.set('aya_welcomed','1');
+  }
+  if(LS.get('aya_welcomed')!=='1'&&'serviceWorker'in navigator){
+    var w=document.getElementById('welcomeOverlay');
+    if(w){w.style.display='flex';}
+    document.getElementById('enableNotifBtn').onclick=enablePush;
+    document.getElementById('skipWelcomeBtn').onclick=closeWelcome;
+  }
+
+  /* ---- service worker ---- */
+  if('serviceWorker' in navigator&&location.protocol==='https:'){navigator.serviceWorker.register('sw.js').catch(function(){});}
+
+  /* ---- جلب بيانات اليوم من السحابة (إن وُجدت) ---- */
+  cloudPull();
+</script>
+</body>
+</html>
