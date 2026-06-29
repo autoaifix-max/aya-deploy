@@ -29,8 +29,10 @@ Value: KdgQ6hnPsUjXi1tzrKgrY0sfKh-43ng1VITo3egh6EU
 ### Secret ٣:
 ```
 Name: SUPABASE_SERVICE_ROLE_KEY
-Value: sb_secret_2ACONng_ZY_c5NtX-1DEHQ_YQlsC_Gz
+Value: [PUT_THIS_IN_VERCEL_ENVIRONMENT_VARIABLES_ONLY_NOT_IN_GITHUB]
 ```
+**ملاحظة أمنية:** لا تضع هذا المفتاح في GitHub أبدًا!
+استخدمه فقط في Vercel Environment Variables أو بيئة السيرفر الآمنة.
 اضغط **Add secret**
 
 ✅ **النتيجة:** ستظهر الثلاثة في القائمة

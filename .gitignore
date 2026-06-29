@@ -1,0 +1,31 @@
+# Secrets & Environment
+.env
+.env.local
+.env.*.local
+SETUP_PUSH_NOTIFICATIONS.md
+
+# Node modules
+node_modules/
+package-lock.json
+yarn.lock
+
+# Vercel
+.vercel/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Sensitive data
+config.js
+secret*.js
+
+# Build artifacts (if any)
+dist/
+build/
