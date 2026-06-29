@@ -6,9 +6,44 @@
 var SUPA_URL='';
 var SUPA_KEY='';
 var FAMILY_ID='';
+var AHMED_WHATSAPP_NUMBER='966535473565';
 
 // Supabase Client
 let supabase = null;
+
+// Emotional Messages
+const ahmedMessages = [
+  "آية، هذا التطبيق مو بس عشان الحمل…\nهذا عشان أقول لك كل يوم: أنا أحبك، وأنتِ مو لحالك 🤍",
+  "آية، راحتك اليوم أهم من أي شيء. خذي وقتك، والباقي عليّ 🤍",
+  "وجودك في حياتي نعمة، ووجود البيبي زادها جمال.",
+  "لا تشيلين هم التعب لحالك، أنا موجود معك في كل لحظة.",
+  "أحبك يا آية، وأحب كل شيء يطمّنك ويريّحك.",
+  "اليوم لا تبذلين مجهود. أحمد يتكفل بالباقي.",
+  "أنتِ مو مطالبة تكونين قوية طول الوقت، أنا معك.",
+  "إذا تعبتي أو خفتي، قولي لي. وجودي جنبك حقك عليّ.",
+  "أحبك في هدوئك، في خوفك، في تعبك، وفي كل لحظة تجمعنا."
+];
+
+const babyMessages = [
+  "ماما آية، خذي نفس وارتاحي…\nبابا أحمد يحبك، وأنا أحتاجك مبسوطة وهادية 👶🤍",
+  "ماما آية، لا تتعبين نفسك اليوم. أنا أحتاجك مرتاحة وهادية 👶🤍",
+  "بابا أحمد يقول لك: ابتسمي، وأنا أقول لك: خذي راحتك يا ماما.",
+  "أنا صغير الآن، بس أحس بحبكم لي من بدري 🤍",
+  "ماما، اشربي ماء وخذي لقيمات بسيطة… أنا معك.",
+  "اليوم نبي هدوء وراحة، والباقي على بابا أحمد.",
+  "ماما آية، كل ما ترتاحين أحس الدنيا أهدأ.",
+  "أنا والبابا نحبك، فلا تتعبين نفسك فوق طاقتها.",
+  "خذي نفس، اشربي ماء، وابتسمي شوي… أنا هنا معك 👶🤍"
+];
+
+const quickMessages = {
+  reassure: "أنا بخير يا أحمد، بس حبيت أطمنك 🤍",
+  hug: "أحمد، محتاجة وجودك شوي 🤍",
+  water: "أحمد، جيب لي ماء لو سمحت 🤍",
+  food: "أحمد، أبي أكل خفيف يناسب الغثيان 🤍",
+  call: "أحمد، اتصل علي إذا تقدر.",
+  comfort: "أحمد، محتاجة أطمئن. كلمني شوي 🤍"
+};
 
 // State
 let state = {
@@ -16,7 +51,9 @@ let state = {
   waterCount: 0,
   checklist: {},
   darkMode: localStorage.getItem('darkMode') === 'true',
-  selectedSymptom: null
+  selectedSymptom: null,
+  ahmedMessageIndex: 0,
+  babyMessageIndex: 0
 };
 
 // ============================================================
@@ -37,6 +74,7 @@ window.addEventListener('DOMContentLoaded', async () => {
 
   // Load state
   loadState();
+  loadDailyMessages();
   renderUI();
 
   // Setup listeners
@@ -54,6 +92,15 @@ function setupListeners() {
   // Tab Navigation
   document.querySelectorAll('.nav-item').forEach(item => {
     item.addEventListener('click', () => switchTab(item.dataset.tab));
+  });
+
+  // Emotional Messages
+  document.getElementById('ahmedNextBtn').addEventListener('click', showNextAhmedMessage);
+  document.getElementById('babyNextBtn').addEventListener('click', showNextBabyMessage);
+
+  // Quick Messages
+  document.querySelectorAll('[data-message-key]').forEach(btn => {
+    btn.addEventListener('click', () => sendQuickMessage(btn.dataset.messageKey));
   });
 
   // Tab 2: Symptom Selector
@@ -328,12 +375,76 @@ async function saveDoctorAppointment(e) {
 }
 
 // ============================================================
+// EMOTIONAL MESSAGES
+// ============================================================
+
+function loadDailyMessages() {
+  const today = state.todayDate;
+  const ahmedKey = `aya_ahmed_daily_message_${today}`;
+  const babyKey = `aya_baby_daily_message_${today}`;
+
+  const savedAhmedIndex = localStorage.getItem(ahmedKey);
+  const savedBabyIndex = localStorage.getItem(babyKey);
+
+  if (savedAhmedIndex !== null) {
+    state.ahmedMessageIndex = parseInt(savedAhmedIndex);
+  } else {
+    state.ahmedMessageIndex = Math.floor(Math.random() * ahmedMessages.length);
+    localStorage.setItem(ahmedKey, state.ahmedMessageIndex);
+  }
+
+  if (savedBabyIndex !== null) {
+    state.babyMessageIndex = parseInt(savedBabyIndex);
+  } else {
+    state.babyMessageIndex = Math.floor(Math.random() * babyMessages.length);
+    localStorage.setItem(babyKey, state.babyMessageIndex);
+  }
+
+  displayDailyMessages();
+}
+
+function displayDailyMessages() {
+  const ahmedText = ahmedMessages[state.ahmedMessageIndex];
+  const babyText = babyMessages[state.babyMessageIndex];
+
+  document.getElementById('ahmedMessageText').innerHTML = ahmedText.replace(/\n/g, '<br>');
+  document.getElementById('babyMessageText').innerHTML = babyText.replace(/\n/g, '<br>');
+}
+
+function showNextAhmedMessage() {
+  state.ahmedMessageIndex = (state.ahmedMessageIndex + 1) % ahmedMessages.length;
+  const today = state.todayDate;
+  const ahmedKey = `aya_ahmed_daily_message_${today}`;
+  localStorage.setItem(ahmedKey, state.ahmedMessageIndex);
+  displayDailyMessages();
+}
+
+function showNextBabyMessage() {
+  state.babyMessageIndex = (state.babyMessageIndex + 1) % babyMessages.length;
+  const today = state.todayDate;
+  const babyKey = `aya_baby_daily_message_${today}`;
+  localStorage.setItem(babyKey, state.babyMessageIndex);
+  displayDailyMessages();
+}
+
+// ============================================================
+// QUICK MESSAGES
+// ============================================================
+
+function sendQuickMessage(key) {
+  const message = quickMessages[key] || 'أحمد، أحتاجك 🤍';
+  const encodedMessage = encodeURIComponent(message);
+  const url = `https://wa.me/${AHMED_WHATSAPP_NUMBER}?text=${encodedMessage}`;
+  window.open(url, '_blank');
+}
+
+// ============================================================
 // WHATSAPP
 // ============================================================
 
 function openWhatsApp() {
   const message = encodeURIComponent('أحتاجك يا أحمد 💚');
-  const url = `https://wa.me/966535473565?text=${message}`;
+  const url = `https://wa.me/${AHMED_WHATSAPP_NUMBER}?text=${message}`;
   window.open(url, '_blank');
 }
 

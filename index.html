@@ -104,6 +104,18 @@
   .form-group{margin-bottom:16px}
   .form-group label{display:block;font-weight:600;color:var(--pine);font-size:14px;margin-bottom:6px}
 
+  /* Emotional Cards */
+  .emotional-card{background:linear-gradient(135deg,var(--cream),var(--cream-deep));border:1px solid var(--rose);border-radius:16px;padding:16px;margin-bottom:14px}
+  .emotional-card h3{font-family:'Aref Ruqaa',serif;font-size:16px;color:var(--rose);margin-bottom:10px}
+  .emotional-card .message{font-size:14px;color:var(--ink);line-height:1.8;margin-bottom:12px;font-family:'Tajawal',sans-serif}
+  .emotional-card .btn-small{padding:8px 14px;font-size:12px;margin-top:8px;border-radius:20px;background:var(--rose);color:#fff}
+  .emotional-card .btn-small:active{filter:brightness(.9)}
+
+  /* Quick Message Chips */
+  .chip-group{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}
+  .chip{display:inline-flex;align-items:center;gap:6px;padding:10px 14px;background:var(--cream);border:1px solid var(--cream-deep);border-radius:20px;font-size:12px;cursor:pointer;transition:all .2s;color:var(--pine);font-weight:500}
+  .chip:active{background:var(--apricot);color:#fff;border-color:var(--apricot)}
+
   /* Responsive */
   @media(max-height:700px){
     header{padding:16px 22px}
@@ -145,6 +157,40 @@
         <div class="stat-card">
           <div class="value" id="waterCount">0</div>
           <div class="label">أكواب ماء من 8</div>
+        </div>
+      </div>
+
+      <!-- رسالة أحمد اليومية -->
+      <div class="emotional-card">
+        <h3>💌 رسالة أحمد اليوم</h3>
+        <div class="message" id="ahmedMessageText">
+          آية، هذا التطبيق مو بس عشان الحمل…<br>
+          هذا عشان أقول لك كل يوم: أنا أحبك، وأنتِ مو لحالك 🤍
+        </div>
+        <button class="btn btn-small" id="ahmedNextBtn">رسالة ثانية</button>
+      </div>
+
+      <!-- رسالة من البيبي -->
+      <div class="emotional-card">
+        <h3>👶 رسالة من البيبي</h3>
+        <div class="message" id="babyMessageText">
+          ماما آية، خذي نفس وارتاحي…<br>
+          بابا أحمد يحبك، وأنا أحتاجك مبسوطة وهادية 👶🤍
+        </div>
+        <button class="btn btn-small" id="babyNextBtn">رسالة جديدة من البيبي</button>
+      </div>
+
+      <!-- رسائل سريعة لأحمد -->
+      <div class="card">
+        <h2>💬 رسالة سريعة لأحمد</h2>
+        <div class="sub">اختاري ما تريدين أن تقولي له</div>
+        <div class="chip-group" id="quickMessagesGroup">
+          <button class="chip" data-message-key="reassure">طمّني أحمد</button>
+          <button class="chip" data-message-key="hug">أحتاج حضنك</button>
+          <button class="chip" data-message-key="water">جيب لي ماء</button>
+          <button class="chip" data-message-key="food">أبي أكل خفيف</button>
+          <button class="chip" data-message-key="call">اتصل علي</button>
+          <button class="chip" data-message-key="comfort">محتاجة أطمئن</button>
         </div>
       </div>
 
