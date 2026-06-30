@@ -60,42 +60,44 @@ let state = {
 // INIT
 // ============================================================
 
-// Ensure DOM is loaded before running
+// Auto-initialize when DOM is ready
+console.log('📌 app.js loaded, DOM state:', document.readyState);
+
 function initializeApp_Main() {
+  console.log('🚀 Initializing app...');
+
+  // Register Service Worker
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('sw.js').catch(e => console.log('SW:', e));
+  }
+
+  // Initialize Supabase
   try {
-    console.log('🚀 Starting App...');
-
-    // Register Service Worker
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('sw.js').catch(e => console.log('SW:', e));
-    }
-
-    // Initialize Supabase
-    if (SUPA_URL && SUPA_KEY) {
+    if (SUPA_URL && SUPA_KEY && window.supabase) {
       const { createClient } = window.supabase;
       supabase = createClient(SUPA_URL, SUPA_KEY);
+      console.log('✅ Supabase initialized');
     }
-
-    // Load state
-    loadState();
-    loadDailyMessages();
-    renderUI();
-
-    // Setup listeners - IMPORTANT
-    setTimeout(() => {
-      setupListeners();
-      console.log('✅ App Ready!');
-    }, 100);
   } catch(e) {
-    console.error('❌ Error:', e);
+    console.error('⚠️ Supabase error:', e);
   }
+
+  // Load initial data
+  loadState();
+  loadDailyMessages();
+  renderUI();
+
+  // Setup all listeners
+  setupListeners();
+  console.log('✅ App fully initialized!');
 }
 
-// Wait for DOM
+// Run immediately if DOM ready, otherwise wait
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', initializeApp_Main);
 } else {
-  initializeApp_Main();
+  // DOM already loaded, run immediately
+  setTimeout(initializeApp_Main, 50);
 }
 
 // ============================================================

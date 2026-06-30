@@ -369,7 +369,14 @@
 </nav>
 
 <!-- Scripts -->
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="js/app.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" onload="console.log('✅ Supabase loaded')"></script>
+<script>
+// Fallback if Supabase CDN fails
+if (!window.supabase) {
+  window.supabase = { createClient: () => null };
+  console.log('⚠️ Supabase CDN failed, using fallback');
+}
+</script>
+<script src="js/app.js" onload="console.log('✅ app.js loaded')"></script>
 </body>
 </html>
