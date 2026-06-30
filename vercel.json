@@ -1,4 +1,5 @@
 {
+  "buildCommand": "echo 'Static files only - no build needed'",
   "redirects": [
     {
       "source": "/sw.js",
