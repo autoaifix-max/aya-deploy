@@ -1,12 +1,4 @@
 {
-  "env": {
-    "ANTHROPIC_API_KEY": "@anthropic_api_key"
-  },
-  "functions": {
-    "api/*.ts": {
-      "runtime": "node20.x"
-    }
-  },
   "redirects": [
     {
       "source": "/sw.js",

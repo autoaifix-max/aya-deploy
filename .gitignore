@@ -29,3 +29,5 @@ secret*.js
 # Build artifacts (if any)
 dist/
 build/
+
+.vercel
