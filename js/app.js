@@ -60,26 +60,43 @@ let state = {
 // INIT
 // ============================================================
 
-window.addEventListener('DOMContentLoaded', async () => {
-  // Register Service Worker
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('sw.js').catch(e => console.log('SW:', e));
+// Ensure DOM is loaded before running
+function initializeApp_Main() {
+  try {
+    console.log('🚀 Starting App...');
+
+    // Register Service Worker
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('sw.js').catch(e => console.log('SW:', e));
+    }
+
+    // Initialize Supabase
+    if (SUPA_URL && SUPA_KEY) {
+      const { createClient } = window.supabase;
+      supabase = createClient(SUPA_URL, SUPA_KEY);
+    }
+
+    // Load state
+    loadState();
+    loadDailyMessages();
+    renderUI();
+
+    // Setup listeners - IMPORTANT
+    setTimeout(() => {
+      setupListeners();
+      console.log('✅ App Ready!');
+    }, 100);
+  } catch(e) {
+    console.error('❌ Error:', e);
   }
+}
 
-  // Initialize Supabase
-  if (SUPA_URL && SUPA_KEY) {
-    const { createClient } = window.supabase;
-    supabase = createClient(SUPA_URL, SUPA_KEY);
-  }
-
-  // Load state
-  loadState();
-  loadDailyMessages();
-  renderUI();
-
-  // Setup listeners
-  setupListeners();
-});
+// Wait for DOM
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initializeApp_Main);
+} else {
+  initializeApp_Main();
+}
 
 // ============================================================
 // DARK MODE
