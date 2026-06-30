@@ -105,60 +105,56 @@ if (document.readyState === 'loading') {
 // ============================================================
 
 function setupListeners() {
-  try {
-    // Theme
-    const themeToggle = document.getElementById('themeToggle');
-    if (themeToggle) themeToggle.addEventListener('click', toggleDarkMode);
+  // Theme
+  const themeToggle = document.getElementById('themeToggle');
+  themeToggle?.addEventListener('click', toggleDarkMode);
 
-    const whatsappBtn = document.getElementById('whatsappBtn');
-    if (whatsappBtn) whatsappBtn.addEventListener('click', openWhatsApp);
+  const whatsappBtn = document.getElementById('whatsappBtn');
+  whatsappBtn?.addEventListener('click', openWhatsApp);
 
-    // Tab Navigation - CRITICAL
-    const navItems = document.querySelectorAll('.nav-item');
-    console.log('📌 Found nav items:', navItems.length);
-    navItems.forEach(item => {
-      item.addEventListener('click', function() {
-        const tabName = this.dataset.tab;
-        console.log('🔄 Switching to:', tabName);
-        switchTab(tabName);
-      });
-    });
+  // TAB NAVIGATION - Using direct click handlers
+  document.querySelectorAll('.nav-item').forEach(item => {
+    item.onclick = function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      const tabName = this.getAttribute('data-tab');
+      console.log('🔄 Clicked tab:', tabName);
+      switchTab(tabName);
+      return false;
+    };
+  });
 
-    // Emotional Messages
-    const ahmedBtn = document.getElementById('ahmedNextBtn');
-    if (ahmedBtn) ahmedBtn.addEventListener('click', showNextAhmedMessage);
+  // Emotional Messages
+  document.getElementById('ahmedNextBtn')?.addEventListener('click', showNextAhmedMessage);
+  document.getElementById('babyNextBtn')?.addEventListener('click', showNextBabyMessage);
 
-    const babyBtn = document.getElementById('babyNextBtn');
-    if (babyBtn) babyBtn.addEventListener('click', showNextBabyMessage);
+  // Quick Messages
+  document.querySelectorAll('[data-message-key]').forEach(btn => {
+    btn.onclick = () => {
+      sendQuickMessage(btn.dataset.messageKey);
+      return false;
+    };
+  });
 
-    // Quick Messages
-    document.querySelectorAll('[data-message-key]').forEach(btn => {
-      btn.addEventListener('click', () => sendQuickMessage(btn.dataset.messageKey));
-    });
+  // Symptom Selector
+  document.querySelectorAll('[data-symptom]').forEach(btn => {
+    btn.onclick = () => {
+      selectSymptom(btn.dataset.symptom, btn);
+      return false;
+    };
+  });
 
-    // Tab 2: Symptom Selector
-    document.querySelectorAll('[data-symptom]').forEach(btn => {
-      btn.addEventListener('click', () => selectSymptom(btn.dataset.symptom, btn));
-    });
+  // Claude API
+  document.getElementById('sendToClaudeBtn')?.addEventListener('click', sendToClaudeAPI);
 
-    // Tab 2: Send to Claude
-    const claudeBtn = document.getElementById('sendToClaudeBtn');
-    if (claudeBtn) claudeBtn.addEventListener('click', sendToClaudeAPI);
+  // Water Buttons
+  document.getElementById('waterAddBtn')?.addEventListener('click', addWater);
+  document.getElementById('waterMinusBtn')?.addEventListener('click', removeWater);
 
-    // Tab 3: Water Buttons
-    const waterAddBtn = document.getElementById('waterAddBtn');
-    const waterMinusBtn = document.getElementById('waterMinusBtn');
-    if (waterAddBtn) waterAddBtn.addEventListener('click', () => addWater());
-    if (waterMinusBtn) waterMinusBtn.addEventListener('click', () => removeWater());
+  // Doctor Form
+  document.getElementById('doctorForm')?.addEventListener('submit', saveDoctorAppointment);
 
-    // Tab 4: Doctor Form
-    const doctorForm = document.getElementById('doctorForm');
-    if (doctorForm) doctorForm.addEventListener('submit', saveDoctorAppointment);
-
-    console.log('✅ All listeners setup complete!');
-  } catch(e) {
-    console.error('❌ setupListeners error:', e);
-  }
+  console.log('✅ Listeners ready!');
 }
 
 function toggleDarkMode() {
