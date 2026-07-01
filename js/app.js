@@ -83,13 +83,19 @@ function initializeApp_Main() {
   }
 
   // Load initial data
-  loadState();
-  loadDailyMessages();
-  renderUI();
+  try { loadState(); } catch(e) { console.log('⚠️ loadState:', e); }
+  try { loadDailyMessages(); } catch(e) { console.log('⚠️ loadDailyMessages:', e); }
+  try { renderUI(); } catch(e) { console.log('⚠️ renderUI:', e); }
 
-  // Setup all listeners
-  setupListeners();
-  console.log('✅ App fully initialized!');
+  // Setup all listeners - CRITICAL
+  try {
+    setupListeners();
+    console.log('✅ Listeners setup!');
+  } catch(e) {
+    console.error('❌ setupListeners failed:', e);
+  }
+
+  console.log('✅ App ready for interaction!');
 }
 
 // Run immediately if DOM ready, otherwise wait
