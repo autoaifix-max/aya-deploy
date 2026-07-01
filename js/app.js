@@ -8,8 +8,8 @@ var SUPA_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZ
 var FAMILY_ID='00c5bd1d-38b7-4470-a3d5-f195fc77572c';
 var AHMED_WHATSAPP_NUMBER='966535473565';
 
-// Supabase Client
-let supabase = null;
+// Supabase Client — استخدم الموجود أو أنشئ واحد جديد
+var supabase = window.supabase || null;
 
 // Emotional Messages
 const ahmedMessages = [
