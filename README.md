@@ -1,226 +1,36 @@
-# 🌿 دليل آية الغذائي
+This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-> تطبيق ويب شخصي (PWA) لمتابعة تغذية الحمل — صُنع بحب من أبو مانع (أحمد) لزوجته آية 💚
+## Getting Started
 
-## ✨ الميزات
+First, run the development server:
 
-### 📱 واجهة جديدة بالكامل (v2.0)
-- **Bottom Navigation** مع 5 تبويبات سهلة الوصول
-- تصميم **mobile-first** محسّن للجوال
-- **Dark Mode** كامل
-- **RTL** (اتجاه اليمين لليسار) محسّن
-
-### 📅 اليوم (Today)
-- ملخص يومي سريع
-- عداد التقدم الغذائي
-- تتبع أكواب الماء
-- قائمة مهام يومية
-
-### 💭 حالتي (My Status)
-- اختيار الحالة الحالية (غثيان، تعب، دوخة...)
-- **تكامل مع Claude AI** للحصول على نصائح فورية
-- كشف آلي للحالات الطارئة
-- تصنيف المخاطر (طبيعي/احذري/طارئ)
-
-### 🍎 احتياجات الجسم (Body Needs)
-- قائمة العناصر الغذائية الأساسية
-- تتبع تفصيلي لأكواب الماء
-- نسبة الإكمال المرئية
-
-### 👨‍⚕️ الطبيبة (Doctor)
-- تسجيل مواعيد الطبيبة
-- قائمة الأسئلة الموصى بها
-- معلومات عن التحاليل المتوقعة
-- حفظ محلي للمواعيد
-
-### 🔔 التنبيهات (Alerts)
-- علامات تحذيرية للحالات الطارئة
-- قائمة الأشياء المحظورة
-- معلومات طبية موثوقة
-
-### 💬 تواصل سريع
-- زر WhatsApp ثابت: "أحتاجك يا أحمد"
-- إرسال رسالة تلقائية إلى أبو مانع
-
-### 📡 المزامنة السحابية
-- Supabase للنسخ الاحتياطي
-- Web Push Notifications (إشعارات الويب)
-- Service Worker (عمل بدون انترنت)
-- تثبيت على الجوال (PWA)
-
----
-
-## 🚀 الإعداد
-
-### المتطلبات
-- حساب Vercel (مجاني)
-- حساب Supabase (مجاني)
-- ANTHROPIC_API_KEY (مفتاح Claude API)
-
-### الخطوات
-
-#### 1️⃣ نسخ المشروع
 ```bash
-git clone https://github.com/autoaifix-max/aya-deploy.git
-cd aya-deploy
-```
-
-#### 2️⃣ إعدادات Vercel
-```bash
-# تثبيت Vercel CLI
-npm i -g vercel
-
-# النشر
-vercel
-```
-
-#### 3️⃣ إضافة البيانات السرية
-في **Vercel Dashboard**:
-1. اذهب إلى **Settings > Environment Variables**
-2. أضف:
-   ```
-   Name: ANTHROPIC_API_KEY
-   Value: [مفتاح Claude API الخاص بك]
-   Environments: Production
-   ```
-
-#### 4️⃣ تكوين Supabase
-في `index.html` و `dashboard.html`:
-```js
-var SUPA_URL='https://your-project.supabase.co';
-var SUPA_KEY='your-anon-key';  // مفتاح عام (آمن)
-var FAMILY_ID='your-family-uuid';
-```
-
-#### 5️⃣ إنشاء قاعدة البيانات
-اذهب إلى **Supabase Dashboard > SQL Editor** وشغّل:
-```sql
--- انسخ محتوى SUPABASE_SCHEMA.sql
-```
-
-#### 6️⃣ تفعيل الإشعارات (اختياري)
-اتبع `SETUP_PUSH_NOTIFICATIONS.md`
-
----
-
-## 📁 هيكل المشروع
-
-```
-aya-deploy/
-├── index.html              # التطبيق الرئيسي (5 تبويبات)
-├── dashboard.html          # لوحة Abu Manea (الأب)
-├── js/
-│   └── app.js              # منطق التطبيق
-├── api/
-│   └── symptom-advice.ts   # وظيفة Claude على Vercel
-├── sw.js                   # Service Worker
-├── manifest.json           # معلومات PWA
-├── send-reminders.ts       # Edge Function للإشعارات
-├── vercel.json             # إعدادات النشر
-├── package.json            # المكتبات
-└── tsconfig.json           # إعدادات TypeScript
-```
-
----
-
-## 🔐 الأمان
-
-### ✅ آمن تماماً
-- `SUPABASE_KEY` (anon key) → مفتاح عام محمي بـ RLS
-- `ANTHROPIC_API_KEY` → في Vercel Environment Variables فقط
-- لا توجد مفاتيح سرية في GitHub
-
-### ⚠️ تحذير
-**لا تضع أبداً:**
-- `ANTHROPIC_API_KEY` في الملفات
-- `SUPABASE_SERVICE_ROLE_KEY` في GitHub
-- أي بيانات سرية في commit
-
----
-
-## 🧪 الاختبار
-
-### على الجوال
-1. افتح: `https://aya-deploy-blond.vercel.app`
-2. اختبر التبويبات الخمسة
-3. جرب Claude AI (اختر حالة وأرسل)
-4. اختبر WhatsApp (اضغط "أحتاجك يا أحمد")
-5. أضف التطبيق للشاشة الرئيسية
-
-### على الحاسوب
-```bash
-# بيئة محلية
-npm install
 npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
 ```
 
----
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-## 🛠️ التطوير
+You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-### إضافة ميزة جديدة
-1. عدّل `index.html` (HTML/CSS)
-2. عدّل `js/app.js` (JavaScript)
-3. اختبر محلياً: `npm run dev`
-4. ادفع إلى GitHub: `git push`
-5. Vercel سينشر تلقائياً
+This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-### إضافة وظيفة Vercel جديدة
-1. أنشئ ملف في `api/`: `api/my-function.ts`
-2. صِغه كمثال `api/symptom-advice.ts`
-3. ادفع و Vercel سيدريها تلقائياً
+## Learn More
 
----
+To learn more about Next.js, take a look at the following resources:
 
-## 🐛 استكشاف الأخطاء
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-### السؤال: "التطبيق لا يحمل"
-**الحل:**
-1. تحقق من Vercel Logs: **Deployments > {latest} > Logs**
-2. افتح Console (F12): هل توجد أخطاء؟
-3. تحقق من اتصال الانترنت
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
-### السؤال: "Claude AI لا يرد"
-**الحل:**
-1. هل أضفت `ANTHROPIC_API_KEY` في Vercel؟
-2. هل المفتاح صحيح؟
-3. شغّل `vercel env pull` لتنزيل البيانات محلياً
+## Deploy on Vercel
 
-### السؤال: "الإشعارات لا تأتي"
-**الحل:**
-1. تحقق من Supabase Logs
-2. هل جهاز آية مشترك في الإشعارات؟ (انظر `push_subscriptions`)
-3. استثن التطبيق من توفير البطارية
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
----
-
-## 📞 الدعم
-
-### للمشاكل التقنية
-- Vercel Logs: https://vercel.com
-- Supabase Logs: https://app.supabase.com
-- Anthropic API Docs: https://docs.anthropic.com
-
-### للأسئلة عن الحمل
-⚠️ **هذا التطبيق للتذكير والدعم فقط، وليس بديلاً عن الطبيبة!**
-
----
-
-## 📝 الترخيص
-
-MIT License — استخدم وعدّل بحرية
-
----
-
-## 🎯 الخطط المستقبلية
-
-- [ ] رسوم بيانية أسبوعية متقدمة
-- [ ] تتبع الأعراض على مدى الوقت
-- [ ] تنبيهات مخصصة أكثر
-- [ ] تقرير أسبوعي لـ Abu Manea
-- [ ] تكامل مع تطبيقات الصحة الأخرى
-
----
-
-**صُنع بحب 💚 من أبو مانع لآية**
-آخر تحديث: 2026-06-29
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
